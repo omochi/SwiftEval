@@ -24,14 +24,14 @@ internal enum Commands {
         p.arguments = args[1...].map { $0 }
         
         var outData = Data()
-        var outPipe = Pipe()
+        let outPipe = Pipe()
         outPipe.fileHandleForReading.readabilityHandler = { (h) in
             outData.append(h.availableData)
         }
         p.standardOutput = outPipe
         
         var errData = Data()
-        var errPipe = Pipe()
+        let errPipe = Pipe()
         errPipe.fileHandleForReading.readabilityHandler = { (h) in
             errData.append(h.availableData)
         }
