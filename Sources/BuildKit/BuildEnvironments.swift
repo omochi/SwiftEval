@@ -16,8 +16,7 @@ public enum BuildEnvironments {
             }
             
             if dir.lastPathComponent == "Products" {
-//                return
-                fatalError()
+                return try XcodeEnvironment(executablePath: execPath)
             }
             
             dir = dir.deletingLastPathComponent()

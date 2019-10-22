@@ -129,7 +129,7 @@ public enum Evals {
         try fm.changeCurrentDirectory(at: tempDir)
         
         let modulesDir = env.modulesDirectory
-        print(modulesDir.path)
+//        print(modulesDir.path)
         
         var args: [String] = [
             "/usr/bin/swiftc",
@@ -147,7 +147,7 @@ public enum Evals {
         
         args += ["code.swift"]
         
-        print(args)
+//        print(args)
         
         let ret = Commands.run(args)
         guard ret.statusCode == EXIT_SUCCESS else {

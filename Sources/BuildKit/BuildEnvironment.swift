@@ -6,6 +6,4 @@ public protocol BuildEnvironment: AnyObject {
     var modulesDirectory: URL { get }
     
     var binaryDirectory: URL { get }
-    
-    func module(name: String) throws -> Module
 }
