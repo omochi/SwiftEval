@@ -12,7 +12,7 @@ public enum BuildEnvironments {
             }
             
             if dir.lastPathComponent == ".build" {
-                return SwiftPMEnvironment(executablePath: execPath)
+                return try SwiftPMEnvironment(executablePath: execPath)
             }
             
             if dir.lastPathComponent == "Products" {
@@ -20,7 +20,7 @@ public enum BuildEnvironments {
                 fatalError()
             }
             
-            dir = execPath.deletingLastPathComponent()
+            dir = dir.deletingLastPathComponent()
         }        
     }
 }
