@@ -47,7 +47,7 @@ extension SwiftEvalPrivates {
         try fm.changeCurrentDirectory(at: tempDir)
         
         let binDir = Utils.binaryDirectory
-        
+        print(binDir.path)
         let args: [String] = [
             "/usr/bin/swiftc",
             "-emit-library",

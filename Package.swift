@@ -7,14 +7,20 @@ let package = Package(
     platforms: [.macOS(.v10_13)],
     products: [
         .library(
+            name: "BuildKit",
+            targets: ["BuildKit"]),
+        .library(
             name: "SwiftEval",
             type: .dynamic,
-            targets: ["SwiftEval"]),
+            targets: ["SwiftEval"])
     ],
     targets: [
         .target(
+            name: "BuildKit"
+            ),
+        .target(
             name: "SwiftEval",
-            dependencies: []),
+            dependencies: ["BuildKit"]),
         .testTarget(
             name: "SwiftEvalTests",
             dependencies: ["SwiftEval"]),
