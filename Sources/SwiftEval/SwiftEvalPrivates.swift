@@ -6,4 +6,8 @@ public struct SwiftEvalPrivates {
     public dynamic var function0: (() -> Any)? {
         nil
     }
+    
+    public dynamic var function1: ((Any) -> Any)? {
+        nil
+    }
 }

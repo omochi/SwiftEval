@@ -11,6 +11,7 @@ let package = Package(
             targets: ["BuildKit"]),
         .library(
             name: "SwiftEval",
+            type: .dynamic,
             targets: ["SwiftEval"])
     ],
     targets: [

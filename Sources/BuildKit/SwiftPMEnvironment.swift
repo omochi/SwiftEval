@@ -3,6 +3,8 @@ import Foundation
 public final class SwiftPMEnvironment: BuildEnvironment {
     public var configuration: String
     public var buildDirectory: URL
+    public var modulesDirectory: URL { buildDirectory }
+    public var binaryDirectory: URL { buildDirectory }
     
     public init(executablePath: URL) throws {
         var _configuration: String?
@@ -36,15 +38,24 @@ public final class SwiftPMEnvironment: BuildEnvironment {
         }
         self.configuration = c    
         self.buildDirectory = _buildDirectory
+            .appendingPathComponent(configuration)
     }
     
     public func module(name: String) throws -> Module {
-        let objectListFile = buildDirectory
-            .appendingPathComponent(configuration)
-            .appendingPathComponent("\(name).product")
-            .appendingPathComponent("Objects.LinkFileList")
-        let objectFiles = try Utils.readStringLists(file: objectListFile)
-            .map { URL(fileURLWithPath: $0) }
+        let buildDir = buildDirectory
+            .appendingPathComponent("\(name).build")
+        guard FileManager.default.fileExists(atPath: buildDir.path) else {
+            throw MessageError("no module build directory: \(buildDir.path)")
+        }
+
+        var objectFiles: [URL] = []
+        for name in try FileManager.default
+            .contentsOfDirectory(at: buildDir, includingPropertiesForKeys: nil, options: [])
+        {
+            if name.pathExtension == "o" {
+                objectFiles.append(name)
+            }
+        }
         return Module(objectFiles: objectFiles)
     }
 }
